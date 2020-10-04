@@ -1,5 +1,5 @@
 export const styles = {
   palette: {
-    primary: "#FF0000"
+    primary: "#1DB954"
   }
 };
