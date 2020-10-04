@@ -1,11 +1,25 @@
 import React from "react";
 import styled from "styled-components";
+import { Button, Text } from "../components";
 
 const Login = () => {
   return (
     <Container>
       <BackgroundSide />
-      <Actions></Actions>
+      <Actions>
+        <div>
+          <Text as="h1" color="white">
+            Acessar sua conta do Spotify
+          </Text>
+          <Text color="white">
+            Voce tera acesso a milhares de musicas e playlists, basta acessar
+            sua conta do spotify
+          </Text>
+          <Button px={50} my={40}>
+            Acessar
+          </Button>
+        </div>
+      </Actions>
     </Container>
   );
 };
@@ -15,7 +29,7 @@ const Container = styled.div`
   width: 100vw;
 
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas: "bg txt";
 `;
@@ -29,11 +43,20 @@ const BackgroundSide = styled.div`
 `;
 
 const Actions = styled.div`
+  /* flex-wrap: wrap; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
   background-image: linear-gradient(90deg, #c074b2, #8ab5e8);
   grid-area: txt;
   position: relative;
 
-  &:after {
+  & > div {
+    z-index: 2;
+  }
+  &::before {
     content: "";
     position: absolute;
     top: 0;
@@ -41,6 +64,7 @@ const Actions = styled.div`
     width: 100%;
     height: 100%;
     background-image: linear-gradient(transparent, #000);
+    pointer-events: none;
   }
 `;
 

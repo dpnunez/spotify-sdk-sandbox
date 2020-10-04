@@ -10,19 +10,28 @@ const AuthenticatedApp = lazy(loadAuthenticatedApp);
 const UnauthenticatedApp = lazy(() => import("./UnauthenticatedApp"));
 
 const GlobalStyle = createGlobalStyle`
-* {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  outline: none;
-}
-button, a {
-  cursor: pointer;
-  &:disabled{
-    cursor: not-allowed;
+  * {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Roboto'
   }
-}
+  button, a {
+    cursor: pointer;
+    &:disabled{
+      cursor: not-allowed;
+    }
+  }
+
+  span, p {
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
 `;
 
 const App = () => {
