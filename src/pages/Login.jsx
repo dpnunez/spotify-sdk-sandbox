@@ -2,6 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Button, Text } from "../components";
 
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+
+const loginRedirect = () => {
+  const scopes = ["streaming", "user-read-email", "user-read-private"];
+  window.location = `https://accounts.spotify.com/authorize?response_type=token&scope=${encodeURIComponent(
+    scopes
+  )}&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
+    `${window.location.origin}/callback`
+  )}`;
+};
+
 const Login = () => {
   return (
     <Container>
@@ -15,7 +26,7 @@ const Login = () => {
             Voce tera acesso a milhares de musicas e playlists, basta acessar
             sua conta do spotify
           </Text>
-          <Button px={50} my={40}>
+          <Button onClick={loginRedirect} px={50} my={40}>
             Acessar
           </Button>
         </div>
@@ -43,7 +54,6 @@ const BackgroundSide = styled.div`
 `;
 
 const Actions = styled.div`
-  /* flex-wrap: wrap; */
   display: flex;
   flex-direction: column;
   justify-content: center;
