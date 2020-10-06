@@ -4,6 +4,10 @@ import App from "./App";
 
 import Providers from "./context";
 
+window.onSpotifyWebPlaybackSDKReady = () => {
+  // You can now initialize Spotify.Player and use the SDK
+};
+
 ReactDOM.render(
   <React.StrictMode>
     <Providers>

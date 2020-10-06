@@ -6,7 +6,6 @@ import { useUser } from "../context/user-context";
 
 const Callback = ({ location, history }) => {
   const { userDispatch } = useUser();
-  console.log(userDispatch);
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -17,9 +16,7 @@ const Callback = ({ location, history }) => {
       }
       history.push("/dashboard");
     };
-    console.log("oi");
     if (location.hash) {
-      console.log("oi");
       const searchInstance = new URLSearchParams(
         location.hash.replace("#", "?")
       );
@@ -27,7 +24,6 @@ const Callback = ({ location, history }) => {
         "@token-spotify",
         searchInstance.get("access_token")
       );
-      console.log(searchInstance.get("access_token"));
       getUserInfo();
     }
   }, [location.hash]);

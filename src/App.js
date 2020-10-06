@@ -10,6 +10,9 @@ const AuthenticatedApp = lazy(loadAuthenticatedApp);
 const UnauthenticatedApp = lazy(() => import("./UnauthenticatedApp"));
 
 const GlobalStyle = createGlobalStyle`
+  html, body, #root {
+    background-color: ${({ theme }) => theme.palette.bgColor}
+  }
   * {
     border: 0;
     padding: 0;
@@ -40,8 +43,6 @@ const App = () => {
   useEffect(() => {
     loadAuthenticatedApp();
   }, []);
-
-  console.log(userInfo);
 
   return (
     <Theme>
