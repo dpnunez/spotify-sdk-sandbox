@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.palette.bgColor}
   }
   * {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
     border: 0;
     padding: 0;
     margin: 0;
@@ -34,6 +36,19 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-size: 38px;
+  }
+
+  /* Works on Chrome/Edge/Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF44;
+    border-radius: 20px;
+    margin: 0 2px;
   }
 `;
 

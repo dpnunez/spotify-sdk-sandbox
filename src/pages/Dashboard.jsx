@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-
-import { useUser } from "../context/user-context";
+import styled from "styled-components";
+import { Player } from "../components";
 
 import { getToken } from "../helpers";
 import { useScript } from "../hooks";
 import { fetchClient } from "../services/fetchClient";
 
+export const CLOSED_PLAYER = 80;
+
 const Dashboard = () => {
+  const [device, setDevice] = useState();
+  const [items, setItems] = useState([]);
   const script = useScript("https://sdk.scdn.co/spotify-player.js");
 
   const sdkReadyCallback = useCallback(() => {
@@ -41,6 +45,7 @@ const Dashboard = () => {
       // Ready
       player.addListener("ready", ({ device_id }) => {
         console.log("Ready with Device ID", device_id);
+        setDevice(device_id);
         // const play = ({
         //   spotify_uri,
         //   playerInstance: {
@@ -80,32 +85,61 @@ const Dashboard = () => {
   useEffect(() => {
     sdkReadyCallback();
 
-    // const getRecently  = async () => {
-    //   try {
+    const getRecently = async () => {
+      try {
+        const {
+          tracks: { items }
+        } = await fetchClient.get(`/playlists/7vpFDHEYo4To6dJOAS2mud`);
+        setItems(items);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-    //   }
-    // }
+    getRecently();
   }, []);
 
   return (
-    <div>
-      asd
-      <button
-        onClick={async () => {
-          await fetchClient.put("me/player/pause");
-        }}
-      >
-        puase
-      </button>
-      <button
-        onClick={async () => {
-          await fetchClient.put("me/player/play");
-        }}
-      >
-        play
-      </button>
-    </div>
+    <DashContainer>
+      <DashboardContent>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+        <h1>asd</h1>
+      </DashboardContent>
+      <Player />
+    </DashContainer>
   );
 };
+
+const DashContainer = styled.section`
+  height: 100vh;
+`;
+
+const DashboardContent = styled.div`
+  height: calc(100vh - ${CLOSED_PLAYER}px);
+  width: 100vw;
+  overflow: auto;
+`;
 
 export default Dashboard;

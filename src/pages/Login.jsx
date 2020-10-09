@@ -5,7 +5,12 @@ import { Button, Text } from "../components";
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
 const loginRedirect = () => {
-  const scopes = ["streaming", "user-read-email", "user-read-private"];
+  const scopes = [
+    "streaming",
+    "user-read-email",
+    "user-read-private",
+    "user-modify-playback-state"
+  ];
   window.location = `https://accounts.spotify.com/authorize?response_type=token&scope=${encodeURIComponent(
     scopes
   )}&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
