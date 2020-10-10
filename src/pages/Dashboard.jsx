@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Player } from "../components";
+import { Player, PlayerCard, Text } from "../components";
 
 import { getToken } from "../helpers";
 import { useScript } from "../hooks";
@@ -87,9 +87,7 @@ const Dashboard = () => {
 
     const getRecently = async () => {
       try {
-        const {
-          tracks: { items }
-        } = await fetchClient.get(`/playlists/7vpFDHEYo4To6dJOAS2mud`);
+        const { items } = await fetchClient.get(`/me/playlists`);
         setItems(items);
       } catch (e) {
         console.log(e);
@@ -102,30 +100,11 @@ const Dashboard = () => {
   return (
     <DashContainer>
       <DashboardContent>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
-        <h1>asd</h1>
+        <Text as="h1">Suas playlists</Text>
+        {items.length > 0 &&
+          items.map(playlist => (
+            <PlayerCard key={playlist.href} {...playlist} />
+          ))}
       </DashboardContent>
       <Player />
     </DashContainer>
@@ -140,6 +119,7 @@ const DashboardContent = styled.div`
   height: calc(100vh - ${CLOSED_PLAYER}px);
   width: 100vw;
   overflow: auto;
+  padding: 40px;
 `;
 
 export default Dashboard;

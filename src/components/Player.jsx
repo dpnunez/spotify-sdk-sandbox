@@ -21,6 +21,7 @@ const PlayerContainer = styled.div`
   width: 100%;
   background-color: #272727;
   position: absolute;
+  box-shadow: -3px 4px 20px 0px black;
 `;
 
 export { Player };
