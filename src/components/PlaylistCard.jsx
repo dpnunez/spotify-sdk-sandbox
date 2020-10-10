@@ -1,13 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
+
 import PlayIconImg from "../assets/play_icon.svg";
 
 import { Text } from "./Text";
 
-// import { Container } from './styles';
-
 const PlayerCard = ({ images, name, tracks, ...props }) => {
-  console.log(props);
   return (
     <CardContainer>
       <PlayIcon icon={PlayIconImg} />
@@ -37,6 +36,10 @@ const PlayIcon = styled.div`
 
   transition: all 0.4s ease;
   opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const CardContainer = styled.div`
@@ -54,17 +57,17 @@ const CardContainer = styled.div`
     height: 100%;
     grid-area: cover;
   }
-
-  &:hover {
-    ${PlayIcon} {
-      opacity: 1;
-    }
-  }
 `;
 
 const Details = styled.div`
   grid-area: info;
   margin: 0 10px;
 `;
+
+PlayerCard.propTypes = {
+  images: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+  tracks: PropTypes.object.isRequired
+};
 
 export { PlayerCard };
