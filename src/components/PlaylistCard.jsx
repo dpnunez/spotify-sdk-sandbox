@@ -5,11 +5,18 @@ import styled from "styled-components";
 import PlayIconImg from "../assets/play_icon.svg";
 
 import { Text } from "./Text";
+import { usePlayerDispatch, usePlayerState } from "../context/player-context";
 
-const PlayerCard = ({ images, name, tracks, ...props }) => {
+const PlayerCard = ({ images, name, tracks, id, ...props }) => {
+  // const playerState = usePl itemsayerState();
+  const playerDispatch = usePlayerDispatch();
+
   return (
     <CardContainer>
-      <PlayIcon icon={PlayIconImg} />
+      <PlayIcon
+        icon={PlayIconImg}
+        onClick={() => playerDispatch({ type: "SET_PLAYLIST", value: id })}
+      />
       <img src={images[1].url} />
       <Details>
         <Text as="h3">{name}</Text>
@@ -67,7 +74,8 @@ const Details = styled.div`
 PlayerCard.propTypes = {
   images: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
-  tracks: PropTypes.object.isRequired
+  tracks: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export { PlayerCard };

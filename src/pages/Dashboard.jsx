@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Player, PlayerCard, Text } from "../components";
+import { usePlayerDispatch } from "../context/player-context";
 
 import { getToken } from "../helpers";
 import { useScript } from "../hooks";
@@ -10,6 +11,7 @@ export const CLOSED_PLAYER = 80;
 
 const Dashboard = () => {
   const [device, setDevice] = useState();
+  const playerDispatch = usePlayerDispatch();
   const [items, setItems] = useState([]);
   const script = useScript("https://sdk.scdn.co/spotify-player.js");
 
@@ -45,7 +47,7 @@ const Dashboard = () => {
       // Ready
       player.addListener("ready", ({ device_id }) => {
         console.log("Ready with Device ID", device_id);
-        setDevice(device_id);
+        playerDispatch({ type: "SET_DEVICE", value: device_id });
         // const play = ({
         //   spotify_uri,
         //   playerInstance: {
